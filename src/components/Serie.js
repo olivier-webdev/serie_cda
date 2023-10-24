@@ -1,16 +1,22 @@
 import styles from "./Serie.module.scss";
-import image from "../assets/images/breaking_bad.png";
+import { useState } from "react";
 
-export default function Serie() {
+export default function Serie({ title, image }) {
+  const [liked, setLiked] = useState(false);
+
+  const handleClick = () => {
+    setLiked(!liked);
+  };
   return (
-    <div className={`${styles.serie}`}>
+    <div onClick={handleClick} className={`${styles.serie}`}>
       <div className={`${styles.imgContainer}`}>
         <img src={image} alt="oneSerie" />
       </div>
       <div
-        className={`${styles.title} d-flex justify-content-center align-items-center`}
+        className={`${styles.title} d-flex flex-column justify-content-center align-items-center`}
       >
-        <h3>Breaking Bad</h3>
+        <h3 className="mb10">{title}</h3>
+        <i className={`fas fa-heart ${liked ? "text-liked" : ""}`}></i>
       </div>
     </div>
   );
